@@ -1,0 +1,26 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/assets/(.*)",
+      "destination": "/interface/assets/$1"
+    },
+    {
+      "source": "/app.js",
+      "destination": "/interface/app.js"
+    },
+    {
+      "source": "/styles.css",
+      "destination": "/interface/styles.css"
+    },
+    {
+      "source": "/",
+      "destination": "/interface/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/interface/index.html"
+    }
+  ]
+}
