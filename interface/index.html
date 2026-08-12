@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Dashboard</title>
+    <link rel="icon" type="image/svg+xml" href="assets/weather-icon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="weather-rain">
+    <div class="weather-bg" aria-hidden="true"></div>
+    <div class="rain-layer" aria-hidden="true"></div>
+
+    <main class="app-frame">
+      <aside class="sidebar">
+        <a class="brand" href="#" aria-label="Weather Dashboard" data-view="weather">
+          <span class="brand-icon">☔</span>
+          <span>
+            <strong>Weather</strong>
+            <small>Dashboard</small>
+          </span>
+        </a>
+
+        <nav class="nav-menu" aria-label="Navegação principal">
+          <a class="nav-item active" href="#" data-view="weather"><span>⌂</span>Clima atual</a>
+          <a class="nav-item" href="#" data-view="map"><span>⌖</span>Mapa</a>
+          <a class="nav-item" href="#" data-view="favorites"><span>♡</span>Favoritos</a>
+          <a class="nav-item" href="#" data-view="alerts"><span>♢</span>Alertas</a>
+          <a class="nav-item" href="#" data-view="settings"><span>⚙</span>Configurações</a>
+        </nav>
+
+        <section class="recent-panel">
+          <div class="panel-title">Últimas pesquisas</div>
+          <div class="recent-list" id="recentCities"></div>
+          <button class="view-all" type="button" data-view="weather">
+            <span>◷</span>
+            Ver todas
+          </button>
+        </section>
+      </aside>
+
+      <section class="content-shell">
+        <header class="top-actions">
+          <form class="search-panel" id="searchForm">
+            <label class="sr-only" for="cityInput">Pesquisar cidade</label>
+            <div class="search-box">
+              <span class="search-icon">⌕</span>
+              <input id="cityInput" name="city" type="search" placeholder="Brasília" autocomplete="off" required />
+              <button class="clear-search" type="button" id="clearSearch" aria-label="Limpar pesquisa">×</button>
+              <button class="sr-submit" type="submit" id="searchButton">Buscar</button>
+            </div>
+          </form>
+
+          <div class="mode-actions" aria-label="Ações rápidas">
+            <button class="icon-button" type="button" id="themeToggle" aria-label="Reduzir animações">☾</button>
+            <button class="icon-button" type="button" id="favoriteToggle" aria-label="Favoritar cidade">☆</button>
+          </div>
+        </header>
+
+        <section class="status-message hidden" id="statusMessage"></section>
+
+        <section class="view-panel active" data-panel="weather">
+          <section class="hero-weather">
+            <div class="location-line">
+              <h1 id="placeName">Brasília, DF</h1>
+              <span>⌖</span>
+            </div>
+            <p class="date-line" id="updatedAt">Terça-feira, 21 de Maio · 17:30</p>
+
+            <div class="current-summary">
+              <div class="weather-mark" id="weatherIcon">☔</div>
+              <div>
+                <p class="condition" id="condition">Chuva leve</p>
+                <div class="temperature"><span id="temperature">24</span>°C</div>
+                <p class="feels-line">Sensação térmica <strong id="feelsLike">26°C</strong></p>
+              </div>
+            </div>
+
+            <div class="quick-metrics">
+              <article>
+                <span class="metric-icon">♢</span>
+                <div>
+                  <p>Umidade</p>
+                  <strong id="humidity">78%</strong>
+                </div>
+              </article>
+              <article>
+                <span class="metric-icon">≋</span>
+                <div>
+                  <p>Vento</p>
+                  <strong id="wind">12 km/h</strong>
+                  <small id="windDirection">SSE</small>
+                </div>
+              </article>
+              <article>
+                <span class="metric-icon">⊙</span>
+                <div>
+                  <p>Pressão</p>
+                  <strong id="pressure">1012 hPa</strong>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section class="lower-grid">
+            <article class="glass-card forecast-card">
+              <header class="card-heading">
+                <h2>Previsão dos próximos dias</h2>
+                <span id="timezoneLabel">America/Sao_Paulo</span>
+              </header>
+              <div class="forecast-list" id="forecastList"></div>
+            </article>
+
+            <article class="glass-card details-card">
+              <h2>Detalhes adicionais</h2>
+              <div class="details-list">
+                <div class="detail-row"><span>◉</span><p>Pressão atmosférica</p><strong id="detailPressure">1012 hPa</strong></div>
+                <div class="detail-row"><span>☼</span><p>Índice UV</p><strong><span id="uvIndex">2</span> <em id="uvLabel">Baixo</em></strong></div>
+                <div class="detail-row"><span>♢</span><p>Ponto de orvalho</p><strong id="dewPoint">20°C</strong></div>
+                <div class="detail-row"><span>☀</span><p>Nascer do sol</p><strong id="sunrise">06:32</strong></div>
+                <div class="detail-row"><span>☀</span><p>Pôr do sol</p><strong id="sunset">17:41</strong></div>
+              </div>
+            </article>
+
+            <article class="glass-card insight-card">
+              <span class="insight-icon">☂</span>
+              <div>
+                <strong id="insightTitle">Há chance de chuva durante a noite.</strong>
+                <p id="insightText">Leve um guarda-chuva se for sair.</p>
+              </div>
+            </article>
+          </section>
+        </section>
+
+        <section class="view-panel utility-view" data-panel="map">
+          <article class="glass-card tool-card">
+            <header class="tool-heading">
+              <div>
+                <p>Mapa</p>
+                <h2 id="mapTitle">Localização da cidade</h2>
+              </div>
+              <button class="secondary-action" type="button" id="openMapButton">Abrir no mapa</button>
+            </header>
+            <div class="map-frame">
+              <iframe id="mapFrame" title="Mapa da cidade pesquisada" loading="lazy"></iframe>
+            </div>
+          </article>
+        </section>
+
+        <section class="view-panel utility-view" data-panel="favorites">
+          <article class="glass-card tool-card">
+            <header class="tool-heading">
+              <div>
+                <p>Favoritos</p>
+                <h2>Cidades salvas</h2>
+              </div>
+              <button class="secondary-action" type="button" id="addFavoriteButton">Salvar cidade atual</button>
+            </header>
+            <div class="saved-list" id="favoritesList"></div>
+          </article>
+        </section>
+
+        <section class="view-panel utility-view" data-panel="alerts">
+          <article class="glass-card tool-card">
+            <header class="tool-heading">
+              <div>
+                <p>Alertas</p>
+                <h2>Regras locais</h2>
+              </div>
+              <button class="secondary-action" type="button" id="saveAlertsButton">Salvar alertas</button>
+            </header>
+            <div class="settings-grid">
+              <label class="setting-row"><span>Chuva acima de</span><input id="rainAlert" type="number" min="0" max="100" step="5" /><small>%</small></label>
+              <label class="setting-row"><span>Temperatura acima de</span><input id="heatAlert" type="number" min="-20" max="60" step="1" /><small>°C</small></label>
+              <label class="setting-row"><span>Vento acima de</span><input id="windAlert" type="number" min="0" max="160" step="5" /><small>km/h</small></label>
+            </div>
+            <div class="alert-results" id="alertResults"></div>
+          </article>
+        </section>
+
+        <section class="view-panel utility-view" data-panel="settings">
+          <article class="glass-card tool-card">
+            <header class="tool-heading">
+              <div>
+                <p>Configurações</p>
+                <h2>Preferências do painel</h2>
+              </div>
+              <button class="secondary-action" type="button" id="saveSettingsButton">Salvar</button>
+            </header>
+            <div class="settings-grid">
+              <label class="setting-row">
+                <span>Unidade de temperatura</span>
+                <select id="tempUnit"><option value="c">Celsius</option><option value="f">Fahrenheit</option></select>
+              </label>
+              <label class="setting-row">
+                <span>Unidade do vento</span>
+                <select id="windUnit"><option value="kmh">km/h</option><option value="ms">m/s</option></select>
+              </label>
+              <label class="setting-row"><span>Cidade inicial</span><input id="defaultCity" type="text" placeholder="Brasília" /></label>
+              <label class="toggle-row"><span>Reduzir animações do clima</span><input id="reduceMotion" type="checkbox" /></label>
+            </div>
+          </article>
+        </section>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
