@@ -8,11 +8,15 @@ Consulte o clima de cidades ao redor do mundo, acompanhe previsões, salve favor
 
 <br>
 
-![HTML](https://img.shields.io/badge/HTML5-E34F26?logo=html5\&logoColor=white)
-![CSS](https://img.shields.io/badge/CSS3-1572B6?logo=css3\&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript\&logoColor=black)
+[![Demo](https://img.shields.io/badge/🌐_Acessar_Demo-Weather_Dashboard-2ea44f?style=for-the-badge)](https://weather-dashboard-iota-weld.vercel.app/)
+
+<br>
+
+![HTML](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
+![CSS](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
 ![Open-Meteo](https://img.shields.io/badge/API-Open--Meteo-2196F3)
-![OpenStreetMap](https://img.shields.io/badge/Mapa-OpenStreetMap-7EBC6F?logo=openstreetmap\&logoColor=white)
+![OpenStreetMap](https://img.shields.io/badge/Mapa-OpenStreetMap-7EBC6F?logo=openstreetmap&logoColor=white)
 
 </div>
 
